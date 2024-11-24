@@ -19,14 +19,14 @@ const generateIconSVG = (options) => {
   svg.setAttribute("xmlns", svgNS);
 
   // 引用依赖的字体文件
-  // const style = document.createElementNS(svgNS, "style");
-  // style.textContent = `
-  //   @font-face {
-  //     font-family: 'chuxiamingchaobold';
-  //     src: url('D:/indie/github/logo.surf/assets/chuxiamingchaobold.ttf') format('truetype');
-  //   }
-  // `;
-  // svg.appendChild(style);
+  const style = document.createElementNS(svgNS, "style");
+  style.textContent = `
+    @font-face {
+      font-family: 'chuxiamingchaobold';
+      src: url('./assets/chuxiamingchaobold.ttf') format('truetype');
+    }
+  `;
+  svg.appendChild(style);
 
   const rect = document.createElementNS(svgNS, "rect");
   rect.setAttribute("width", size);
