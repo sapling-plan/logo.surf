@@ -1,21 +1,32 @@
-let defaultSize = 512
+let defaultSize = 512;
 
 const generateIconSVG = (options) => {
   const {
-    text = 'AI',
-      size = defaultSize,
-      bgColor = '#131516',
-      radius = 80,
-      fontFamily = 'Arial',
-      fontWeight = 'normal',
-      textColor = '#70e000',
-      verticalOffset = 0
+    text = 'Y',
+    size = defaultSize,
+    bgColor = '#1677ff',
+    radius = 512,
+    fontFamily = 'chuxiamingchaobold',
+    fontWeight = 'bold',
+    textColor = '#ffffff',
+    verticalOffset = 0,
+    fontSize = 500,
   } = options;
 
   const svgNS = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(svgNS, "svg");
   svg.setAttribute("viewBox", `0 0 ${size} ${size}`);
   svg.setAttribute("xmlns", svgNS);
+
+  // 引用依赖的字体文件
+  // const style = document.createElementNS(svgNS, "style");
+  // style.textContent = `
+  //   @font-face {
+  //     font-family: 'chuxiamingchaobold';
+  //     src: url('D:/indie/github/logo.surf/assets/chuxiamingchaobold.ttf') format('truetype');
+  //   }
+  // `;
+  // svg.appendChild(style);
 
   const rect = document.createElementNS(svgNS, "rect");
   rect.setAttribute("width", size);
@@ -32,6 +43,7 @@ const generateIconSVG = (options) => {
   textElement.setAttribute("text-anchor", "middle");
   textElement.setAttribute("font-family", fontFamily);
   textElement.setAttribute("font-weight", fontWeight);
+  // textElement.setAttribute("font-size", fontSize);
   textElement.setAttribute("fill", textColor);
   textElement.textContent = text;
   svg.appendChild(textElement);
@@ -42,7 +54,7 @@ const generateIconSVG = (options) => {
 
     let fontSize;
     if (charCount <= 2) {
-      fontSize = size * 0.8;
+      fontSize = size * 2.2; // 控制字符大小
     } else if (isAllEnglish) {
       fontSize = size * 0.75;
     } else {
@@ -387,8 +399,6 @@ const generateIconSVG2 = (options) => {
   return serializer.serializeToString(svg);
 };
 
-
-
 const colorSchemes = [{
     bg: '#1a365d',
     text: '#ffffff',
@@ -505,14 +515,23 @@ const applyColorScheme = (index) => {
 
 
 const defaultSettings = {
-  text: 'AI',
+  text: 'Y',
   size: defaultSize,
-  bgColor: '#131516',
-  radius: 80,
-  fontFamily: 'Arial',
-  fontWeight: 'normal',
-  textColor: '#70e000',
-  verticalOffset: 0
+  bgColor: '#1677ff',
+  radius: 512,
+  fontFamily: 'chuxiamingchaobold',
+  fontWeight: 'bold',
+  textColor: '#ffffff',
+  verticalOffset: 0,
+  fontSize: 500,
+  // text: 'AI',
+  // size: defaultSize,
+  // bgColor: '#131516',
+  // radius: 80,
+  // fontFamily: 'Arial',
+  // fontWeight: 'normal',
+  // textColor: '#70e000',
+  // verticalOffset: 0
 };
 
 const generateIcon = () => {
@@ -524,8 +543,10 @@ const generateIcon = () => {
     fontFamily: document.getElementById('fontFamily').value || 'Arial, sans-serif',
     fontWeight: document.getElementById('fontWeight').value,
     textColor: document.getElementById('textColor').value,
-    verticalOffset: document.getElementById('verticalOffset').value || 0
+    verticalOffset: document.getElementById('verticalOffset').value || 0,
+    fontSize: parseInt(document.getElementById('fontSize')?.value) || 500
   };
+  console.log(">>  generateIcon  options:", options);
 
   const svgString = generateIconSVG(options);
 
@@ -539,13 +560,18 @@ const createFavicon = (size) => {
   return new Promise((resolve) => {
     const img = new Image();
     img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = size;
-      canvas.height = size;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, size, size);
-      canvas.toBlob((blob) => {
-        resolve(blob);
+      const myFont = new FontFace('chuxiamingchaobold', 'url(./assets/chuxiamingchaobold.ttf)');
+      myFont.load().then(font => {
+        console.log(">>  myFont.load  font:", font);
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        ctx.font = font;
+        ctx.drawImage(img, 0, 0, size, size);
+        canvas.toBlob((blob) => {
+          resolve(blob);
+        });
       });
     };
     const encodedSvg = encodeURIComponent(svgString);
@@ -673,27 +699,31 @@ document.getElementById('downloadSvg').addEventListener('click', () => {
 
 function svgToPng(svgString, size) {
   return new Promise((resolve, reject) => {
-    const canvas = document.createElement('canvas');
-    const scale = 4;
-    canvas.width = size * scale;
-    canvas.height = size * scale;
-    const ctx = canvas.getContext('2d');
-
-    ctx.scale(scale, scale);
-
-    const img = new Image();
-    img.onload = () => {
-      ctx.drawImage(img, 0, 0, size, size);
-      canvas.toBlob((blob) => {
-        resolve(blob);
-      }, 'image/png');
-    };
-    img.onerror = (err) => {
-      reject(err);
-    };
-
-    const encodedSvg = encodeURIComponent(svgString);
-    img.src = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
+    const myFont = new FontFace('chuxiamingchaobold', 'url(./assets/chuxiamingchaobold.ttf)');
+    myFont.load().then(font => {
+      console.log(">>  myFont.load  font:", font);
+      const canvas = document.createElement('canvas');
+      const scale = 4;
+      canvas.width = size * scale;
+      canvas.height = size * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.font = '50px chuxiamingchaobold';
+      ctx.scale(scale, scale);
+  
+      const img = new Image();
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, size, size);
+        canvas.toBlob((blob) => {
+          resolve(blob);
+        }, 'image/png');
+      };
+      img.onerror = (err) => {
+        reject(err);
+      };
+  
+      const encodedSvg = encodeURIComponent(svgString);
+      img.src = `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
+    });
   });
 }
 
@@ -749,7 +779,6 @@ fontFamilyInput.addEventListener('input', function() {
   fontFamilySelect.value = '';
 });
 
-
 // example
 function createExampleDiv(svg, title, config) {
   const div = document.createElement('div');
@@ -772,6 +801,19 @@ function createExampleDiv(svg, title, config) {
 
 // Generate examples
 const examples = [
+  {
+    options: {
+      text: 'Y',
+      size: 512,
+      bgColor: '#1677ff',
+      textColor: '#FFFFFF',
+      fontFamily: 'chuxiamingchaobold',
+      fontWeight: 'bold',
+      radius: 512,
+      fontSize: 500
+    },
+    title: 'YouTools'
+  },
   // {
   //   options: {
   //     text: 'PH',
@@ -1593,19 +1635,15 @@ function createLogoGallery() {
   galleryInner.appendChild(fragment);
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
-
   createColorSchemeButtons();
   generateIcon();
-
   createLogoGallery()
 
   examples.forEach(example => {
     const svg = generateIconSVG(example.options);
     const exampleDiv = createExampleDiv(svg, example.title, example.options);
     exampleContainer.appendChild(exampleDiv);
-
   });
 })
 

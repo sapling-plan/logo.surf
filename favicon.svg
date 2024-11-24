@@ -1,0 +1,12 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- <defs> -->
+    <style type="text/css">
+      @font-face {
+        font-family: "chuxiamingchaobold";
+        src: url('./assets/chuxiamingchaobold.ttf') format("truetype");
+      }
+    </style>
+  <!-- </defs> -->
+  <rect width="512" height="512" fill="#1677ff" rx="512" ry="512"/>
+  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="chuxiamingchaobold" font-weight="normal" fill="#ffffff" font-size="410.20072765012833" dy="0">Y</text>
+</svg>

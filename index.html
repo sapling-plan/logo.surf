@@ -159,7 +159,7 @@
               <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-gray-700">Settings</h2>
               <div class="mb-4">
                 <label for="text" class="block mb-2 text-gray-600">Text</label>
-                <input type="text" id="text" class="w-full border rounded px-3 py-2" value="AI">
+                <input type="text" id="text" class="w-full border rounded px-3 py-2" value="Y">
                 <p class="text-xs text-gray-600 mt-2">Emojis are supported. Search & copy emoji on <a href="https://emojispark.com" target="_blank" class="inline-block underline">EmojiSpark.com</a>
                 </p>
               </div>
@@ -170,7 +170,7 @@
                 </div>
                 <div class="w-1/2 px-2">
                   <label for="radius" class="block mb-2 text-gray-600">Radius</label>
-                  <input type="number" id="radius" class="w-full border rounded px-3 py-2" value="80">
+                  <input type="number" id="radius" class="w-full border rounded px-3 py-2" value="512">
                 </div>
               </div>
               <div class="mb-4">
@@ -178,15 +178,16 @@
                 <div class="color-picker-wrapper">
                   <input type="color" id="bgColorPicker" class="hidden">
                   <div id="bgColorPreview" class="color-preview"></div>
-                  <input type="text" id="bgColor" class="color-input w-full border rounded px-3 py-2" value="#131516">
+                  <input type="text" id="bgColor" class="color-input w-full border rounded px-3 py-2" value="#1677ff">
                 </div>
               </div>
               <div class="mb-4">
                 <label for="fontFamily" class="block mb-2 text-gray-600">Font Family</label>
                 <div class="flex">
-                  <input type="text" id="fontFamily" class="w-2/3 border rounded-l px-3 py-2" placeholder="Enter font name or select" value="Arial">
+                  <input type="text" id="fontFamily" class="w-2/3 border rounded-l px-3 py-2" placeholder="Enter font name or select" value="chuxiamingchaobold">
                   <select id="fontFamilySelect" class="w-1/3 border border-l-0 rounded-r px-3 py-2">
                     <option value="">Select font</option>
+                    <option value="chuxiamingchaobold">chuxiamingchaobold</option>
                     <option value="Arial">Arial</option>
                     <option value="Helvetica">Helvetica</option>
                     <option value="Times New Roman">Times New Roman</option>
@@ -206,7 +207,7 @@
               <div class="gap-4 mb-4">
                 <div>
                   <label for="fontWeight" class="block mb-2 text-gray-600">Font Weight</label>
-                  <select id="fontWeight" class="w-full border rounded px-3 py-2">
+                  <select id="fontWeight" class="w-full border rounded px-3 py-2" value="bold">
                     <option value="normal">Normal</option>
                     <option value="bold">Bold</option>
                   </select>
@@ -217,7 +218,7 @@
                 <div class="color-picker-wrapper">
                   <input type="color" id="textColorPicker" class="hidden">
                   <div id="textColorPreview" class="color-preview"></div>
-                  <input type="text" id="textColor" class="color-input w-full border rounded px-3 py-2" value="#70e000">
+                  <input type="text" id="textColor" class="color-input w-full border rounded px-3 py-2" value="#ffffff">
                 </div>
               </div>
               <div class="mb-4">
@@ -444,12 +445,22 @@
       </div>
     </footer>
     <script src="./app.js?v=1"></script>
-    <style>@font-face {
-      font-family: 'ImpactFallback';
-      src: url('./assets/impact.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }</style>
+    <style>
+      /* @font-face {
+        font-family: 'ImpactFallback';
+        src: url('./assets/impact.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      } */
+      /* 初夏明朝體-Bold.ttf */
+      @font-face {
+        font-family: 'chuxiamingchaobold';
+        src: url('./assets/chuxiamingchaobold.ttf') format('truetype');
+        /* font-weight: bold;
+        font-style: normal;
+        font-display: swap; */
+      }
+    </style>
   </body>
 </html>
